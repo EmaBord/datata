@@ -3,7 +3,7 @@ evaluación de parte datata para reclutamiento.
 
 Está divido en 4 aplicaciones Django
 
-1. La aplicación "asignación" se correcponde con la resolución del punto 1 
+1. La aplicación "asignación" se corresponde con la resolución del punto 1 
 inciso maximizar felicidad colectiva. En la elección final del algoritmo 
 que resuelve el problema fue elegida de diferentes estrategias y luego 
 de probar diferentes librerías. En un comienzo pensé en resolverlo de 
@@ -18,30 +18,30 @@ crear por el usuario que fue otro inconveniente encontrado.
 Luego de haber llegado a soluciones frustadas opte por la secuencial y utilizar las funciones max() y sum de python que tienen un orden de 
 ejecución de Big-Oh O(n) está función calcula el valor máximo del elemento de una lista, dando los siguientes tiempos:
 
-Size      Ram           TC                TAR
 
-8k*8k   = 2,0 GB   6.62133097649 s  2.44758892059 s
 
-9k*9k   = 2,5 GB   8.26022982597 s  3.09848880768 s
+8k*8k   Size   2,0 GB Ram   6.62133097649 seg TC   2.44758892059 seg TAR
 
-10k*10  = 3,1 GB  10.0229918957  s  3.83003997803 s
+9k*9k   Size   2,5 GB Ram   8.26022982597 seg TC   3.09848880768 seg TAR
 
-11k*11k = 3,7 GB  13.5811810493  s  4.23024606705 s
+10k*10k Size   3,1 GB Ram  10.0229918957  seg TC   3.83003997803 seg TAR
 
-12k*12k = 4,4 GB  15.7351219654  s  4.97430205345 s
+11k*11k Size  3,7 GB Ram   13.5811810493  seg TC   4.23024606705 seg TAR
 
-13k*13k = 5,2 GB  18.5389990807  s  6.01450896263 s
+12k*12k Size  4,4 GB Ram   15.7351219654  seg TC   4.97430205345 seg TAR
 
-14k*14k  = 6 GB   20.1895141602  s  6.90269398689 s
+13k*13k Size  5,2 GB Ram   18.5389990807  seg TC   6.01450896263 seg TAR
+
+14k*14k Size  6 GB   Ram   20.1895141602  seg TC  6.90269398689 seg  TAR
 
 
 Size = es el tamaño en miles de la matriz 
 
 Ram  = se refiere a la cantidad de Ram que ocupa la matriz creada
 
-TC   = tiempo que tardo en construir la matriz
+TC   = tiempo que tardo en construir la matriz en segundos
 
-TAR  = tiempo del algoritmo en resolver el problema (calcular el maximo de cada persona y sumar los maximos)
+TAR  = tiempo del algoritmo en resolver el problema (calcular el maximo de cada persona y sumar los maximos) en segundos
 
 
 Estos tiempos fueron obtenidos de correr el algoritmo en una máquina con un core i5 y 8GB Ram
