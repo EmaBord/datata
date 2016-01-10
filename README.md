@@ -19,18 +19,30 @@ Luego de haber llegado a soluciones frustadas opte por la secuencial y utilizar 
 ejecución de Big-Oh O(n) está función calcula el valor máximo del elemento de una lista, dando los siguientes tiempos:
 
 Size      Ram           TC                TAR
+
 8k*8k   = 2,0 GB   6.62133097649 s  2.44758892059 s
+
 9k*9k   = 2,5 GB   8.26022982597 s  3.09848880768 s
+
 10k*10  = 3,1 GB  10.0229918957  s  3.83003997803 s
+
 11k*11k = 3,7 GB  13.5811810493  s  4.23024606705 s
+
 12k*12k = 4,4 GB  15.7351219654  s  4.97430205345 s
+
 13k*13k = 5,2 GB  18.5389990807  s  6.01450896263 s
+
 14k*14k  = 6 GB   20.1895141602  s  6.90269398689 s
 
+
 Size = es el tamaño en miles de la matriz 
+
 Ram  = se refiere a la cantidad de Ram que ocupa la matriz creada
+
 TC   = tiempo que tardo en construir la matriz
+
 TAR  = tiempo del algoritmo en resolver el problema (calcular el maximo de cada persona y sumar los maximos)
+
 
 Estos tiempos fueron obtenidos de correr el algoritmo en una máquina con un core i5 y 8GB Ram
 
