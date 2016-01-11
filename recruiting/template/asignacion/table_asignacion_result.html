@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+{% block title%}
+Asignaciones
+{% endblock%}
+
+{% block asignacion_active %}class="active"{% endblock%}
+{% block content%}
+        {{ felicidad_colectiva}}
+        <table class="table table-responsive table-striped table-hover ">
+           
+              
+              <tr>
+                <th class="warning">Persona</th>
+                <th class="warning">Articulo</th>
+                <th class="warning">Felicidad</th>
+                
+              </tr>
+              </thead>
+              <tbody>
+              {% for data in maximas_felicidades %}
+
+                <tr>
+                  <td >Persona{{data.persona}}</td>          
+                  <td >Articulo{{data.articulo}}</td>
+                  <td >{{data.maxima_felicidad}}</td>          
+                           
+                </tr>
+              {% endfor %}
+             <tbody>
+            
+          </table>
+      </form>
+
+
+
+
+
+
+{% endblock %}
