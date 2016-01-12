@@ -4,25 +4,18 @@
 	<head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-
-
-
   <!-- Material Design fonts -->
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
   <!-- Bootstrap -->
   <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-
   <!-- Bootstrap Material Design -->
   <link href="/static/dist/css/bootstrap-material-design.css" rel="stylesheet">
   <link href="/static/dist/css/ripples.min.css" rel="stylesheet">
-
-
   <link href="http://fezvrasta.github.io/snackbarjs/dist/snackbar.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href='https://fonts.googleapis.com/css?family=Patua+One' rel='stylesheet' type='text/css'>
+  {% block head %}{% endblock %}
   <style>
     body {
       padding-top: 1px
@@ -253,10 +246,9 @@
 			}
   </style>
 
-		<title>Recruiting</title>
+		<title>{% block title %}Recruiting{% endblock %}</title>
 	</head>
-	<body >
-			
+	<body >			
 		<div class="navbar navbar-default">
 		  <div class="container-fluid">
 		    <div class="navbar-header">
@@ -270,56 +262,29 @@
 		    <div class="navbar-collapse collapse navbar-responsive-collapse">
 		      <ul class="nav navbar-nav">
 		       	<li {% block asignacion_active %}{% endblock%}><a href=" {% url 'asignacion' %}"> Asignacion</a></li>
-				<li {% block derivada_active %}{% endblock%}><a href=""> Derivada</a></li>
-				<li {% block nombres_active %}{% endblock%}><a href=""> Nombres</a></li>
-        
-				<li><a href=""> Cerrar Sesión</a></li>
-		      </ul>
-		     
+				    <li {% block derivada_active %}{% endblock%}><a href=""> Derivada</a></li>
+				    <li {% block nombres_active %}{% endblock%}><a href=""> Nombres</a></li>        
+				    <li><a href=""> Cerrar Sesión</a></li>
+		      </ul>		     
 		    </div>
 		  </div>
 		</div>
-		<div class="container-fluid">
-      
-      
+		<div class="container-fluid">      
 			 {% block content%}{% endblock%}
     </div>
 		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
 		<script src="/static/dist/js/ripples.min.js"></script>
 		<script src="/static/dist/js/material.min.js"></script>
 		<script src="http://fezvrasta.github.io/snackbarjs/dist/snackbar.min.js"></script>
-
-
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script>
-		<script>
-		  $(function () {
-		    $.material.init();
-		    $(".shor").noUiSlider({
-		      start: 40,
-		      connect: "lower",
-		      range: {
-		        min: 0,
-		        max: 100
-		      }
-		    });
-
-		    $(".svert").noUiSlider({
-		      orientation: "vertical",
-		      start: 40,
-		      connect: "lower",
-		      range: {
-		        min: 0,
-		        max: 100
-		      }
-		    });
-		  });
-		</script>	
-
-
-
-	</body>
+    <script>
+      $(function () {
+        $.material.init();
+       
+      });
+    </script> 
+  </body>
 </HTML>
 		   
         

@@ -1,47 +1,124 @@
 {% extends 'base.html'%}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.0.0/css/responsive.dataTables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/scroller/1.4.0/css/scroller.dataTables.min.css"/> 
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.0.0/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/scroller/1.4.0/js/dataTables.scroller.min.js"></script>
+{% endblock %}
 {% block title%}
 Asignaciones
 {% endblock%}
-
 {% block asignacion_active %}class="active"{% endblock%}
 {% block content%}
-       <form action="{% url 'asignacion' %}" method="post">
-        {% csrf_token %}
-        <button type="submit" id="calcular" class="btn btn-info btn-raised btn-block">Calcular</button>
-        <table class="table table-responsive table-striped table-hover ">
-           
-              <input type="hidden" value= "{{size}}" name="data">
-              <thead>
-              <tr>
-                <th class="warning">P/A</th>
-                {% for persona in personas %}
-                <th class="success">Persona{{ persona }}</th>   
-                {% endfor %} 
-              </tr>
-              </thead>
-              <tbody>
-              {% for articulo in articulos %}
-
-              <tr>
-                <td class="info">Art.{{ articulo }}</td>          
-                {% for persona in personas %}
-                  <td><input name="#{{persona}}-{{articulo}}" class="form-control sm-input" style="width: 3em;" type="number" step="1" min="0" value="0"></td>
-                {% endfor %}          
-              </tr>
-              {% endfor %}
-             <tbody>
-            
+    <div  class="well well-lg"> 
+        <div class="row">
+            <div class="col-md-2">
+            <a href="{%url 'asignacion'%}" class="btn btn-info btn-raised"><i class="material-icons">reply</i> Regresar</a>
+            </div>
+            <div class="col-md-10">
+            <button id="calcular" type="submit" class="btn btn-primary  btn-raised btn-block"><i class="material-icons">functions</i> Calcular</button>
+          </div>
+        </div>        
+        <div class="table-responsive">
+          <table id="felicidades" class="table  ">
+            <thead>
+                <tr>
+                  <th class="warning">P/A</th>
+                  {% for persona in personas %}
+                  <th class="success">Persona{{ persona }}</th>   
+                  {% endfor %} 
+                </tr>
+            </thead>
           </table>
-      </form>
+        </div>
+      
+    </div>
+    <script>        
+        var table = $('#felicidades').dataTable({
+          ajax: "{% url 'asignacion_ajax' size%}" ,       
+          processing:true,  
+          "paging": true,
+          "lengthChange": true,
+          "searching": false,
+          "ordering": false,
+          "info": true,
+          "autoWidth": true,
+          "select": true,          
+          "language":{
+              "decimal":        "",
+              "emptyTable":     "Sin datos para mostrar",
+              "info":           "Mostrando  _END_ de _TOTAL_ entradas",
+              "infoEmpty":      "Mostrando 0 de 0 of 0 filas",
+              "infoFiltered":   "(filtrado desde _MAX_ filas)",
+              "infoPostFix":    "",
+              "thousands":      ",",
+              "lengthMenu":     "Mostrar _MENU_ filas",
+              "lface"   :     "pepe",
+              "faceoadingRecords": "Cargando...",
+              "processing":     "Cargando...",
+              "search":         "Buscar: ",
+              "zeroRecords":    "0 resultados",
+              "paginate": {
+                  "first":      "Primero",
+                  "last":       "Ultimo",
+                  "next":       "Siguiente",
+                  "previous":   "Anterior"
+              },
+              "aria": {
+                  "sortAscending":  ": activate to sort column ascending",
+                  "sortDescending": ": activate to sort column descending"
+              }
+            }          
+        });
+        $(document).ready(function () {        
+        $('#calcular').click(function(){
+            var form = document.createElement('form');
+            form.setAttribute('action', '{% url 'asignacion' %}');
+            form.setAttribute('method', 'POST');
+            data = document.getElementsByName('data');
+            var input1 = document.createElement('input');
+            input1.setAttribute('type', 'hidden');
+            input1.setAttribute('name', 'data');
+            input1.setAttribute('value', '{{size}}');
+            form.appendChild(input1);
+            var csrftoken = getCookie('csrftoken');
+            var token = document.createElement('input');
+            token.setAttribute('type', 'hidden');
+            token.setAttribute('name', 'csrfmiddlewaretoken');
+            token.setAttribute('value', csrftoken);
+            form.appendChild(input1);
+            form.appendChild(token);
+            var datos = table.$('input');
+            for (index = 0; index < datos.length; ++index) {
+                  if (datos[index].value > 0){
+                    var input = document.createElement('input');
+                    input.setAttribute('type', 'number');
+                    input.setAttribute('name', datos[index].name);
+                    input.setAttribute('value', datos[index].value);
+                    form.appendChild(input);  
+                  }                
+            }
+            form.submit();
+          } );
+        } );
 
-
-
-
-  <script type="text/javascript">
-$('#calcular').css({
-  'position':'fixed',
-  // more rules
-);
-</script>
-
+        function getCookie(name) {
+          var cookieValue = null;
+          if (document.cookie && document.cookie != '') {
+              var cookies = document.cookie.split(';');
+              for (var i = 0; i < cookies.length; i++) {
+                  var cookie = jQuery.trim(cookies[i]);
+                  // Does this cookie string begin with the name we want?
+                  if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                      cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                      break;
+                  }
+              }
+          }
+          return cookieValue;
+        }
+      </script>
 {% endblock %}
