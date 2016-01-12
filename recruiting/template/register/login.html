@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <HTML lang='es'>
-	<head>
-	<head>
+  <head>
+  <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- Material Design fonts -->
@@ -15,7 +15,8 @@
   <link href="http://fezvrasta.github.io/snackbarjs/dist/snackbar.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href='https://fonts.googleapis.com/css?family=Patua+One' rel='stylesheet' type='text/css'>
-  {% block head %}{% endblock %}
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
   <style>
     body {
       padding-top: 1px
@@ -242,42 +243,89 @@
       cursor: text;
     }
     .navbar-brand{
-				font-family: "Patua+One";
-			}
+        font-family: "Patua+One";
+      }
   </style>
 
-		<title>{% block title %}Recruiting{% endblock %}</title>
-	</head>
-	<body >			
-		<div class="navbar navbar-default">
-		  <div class="container-fluid">
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		      </button>
-		      <a class="navbar-brand" href="javascript:void(0)">Datata</a>
-		    </div>
-		    <div class="navbar-collapse collapse navbar-responsive-collapse">
-		      <ul class="nav navbar-nav">
-		       	<li {% block asignacion_active %}{% endblock%}><a href=" {% url 'asignacion' %}"> Asignacion</a></li>
-				    <li {% block derivada_active %}{% endblock%}><a href=""> Derivada</a></li>
-				    <li {% block nombres_active %}{% endblock%}><a href=""> Nombres</a></li>        
-				    <li><a href="{% url 'logout' %}"> Cerrar Sesión</a></li>
-		      </ul>		     
-		    </div>
-		  </div>
-		</div>
-		<div class="container-fluid">      
-			 {% block content%}{% endblock%}
+    <title>Inicio</title>
+  </head>
+  <body >     
+    <div class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="javascript:void(0)">Datata</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-responsive-collapse">
+          
+        </div>
+      </div>
     </div>
-		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-		<script src="/static/dist/js/ripples.min.js"></script>
-		<script src="/static/dist/js/material.min.js"></script>
-		<script src="http://fezvrasta.github.io/snackbarjs/dist/snackbar.min.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script>
+    <div class="container-fluid">
+    <div class="row">
+        
+        <div class="col-md-offset-3 col-md-6">
+          <div class="well">
+            <form class="form-horizontal" action="{% url 'register' %}" method="post">
+              {% csrf_token%}
+              <input type="hidden" name="login_captcha" value="1"> 
+              <fieldset>
+                <legend>Iniciar Sesión</legend>
+                {% if error_login_msg %}
+                  <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Clave y/o usuario incorrecto!</strong>
+                    
+                  </div>
+                {% endif %}
+                {% if error_captcha_msg %}
+                  <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Debe completar el captcha!</strong>
+                    
+                  </div>
+                {% endif %}
+                <div class="form-group">
+                  <label for="usuario" class="col-md-2 control-label">Usuario</label>
+                  <div class="col-md-10">
+                    <input type="text" name="user" class="form-control" id="usuario" placeholder="ingrese su nombre de usuario">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="password" class="col-md-2 control-label">Password</label>
+                  <div class="col-md-10">
+                    <input type="password" name="pass" class="form-control " id="password" placeholder="ingrese una clave">
+                  </div>
+                </div>
+                
+                 <div class="form-group">
+                  <div class="col-lg-10 col-lg-offset-2">
+                    <div class="g-recaptcha" data-sitekey="6LezLxUTAAAAAPQ4kEqy5rMiMErLAk4_7g_9fFfH"></div>
+                  </div>
+                </div>
+                 <div class="form-group">
+                  
+                  <div class="col-md-12">
+                    <input type="submit" class="form-control btn btn-raised btn-primary btn-block"  value="Acceder">
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+    </div>      
+       
+    </div>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/static/dist/js/ripples.min.js"></script>
+    <script src="/static/dist/js/material.min.js"></script>
+    <script src="http://fezvrasta.github.io/snackbarjs/dist/snackbar.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script>
     <script>
       $(function () {
         $.material.init();
@@ -286,20 +334,20 @@
     </script> 
   </body>
 </HTML>
-		   
+       
         
 
 
 
 
-			
+      
 
-											
+                      
 
-							
+              
 
-		
-		
-		
-	
+    
+    
+    
+  
 

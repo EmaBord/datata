@@ -1,17 +1,27 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.http import HttpResponse
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+
 
 class AsignacionView(TemplateView):
     template_get            = 'asignacion/get_asignacion.html'
     template_table          = 'asignacion/table_asignacion.html'
     template_table_result   = 'asignacion/table_asignacion_result.html' 
+    
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(AsignacionView, self).dispatch(*args, **kwargs)
+
+
     def  evaluar(self,persona,articulo):
         if persona==0:
             return "Art."+str(articulo) 
         else:
             return """<input name='#"""+str(persona)+"""-"""+str(articulo)+""" 'class='form-control sm-input' style='width: 3em;'' type='number' step='1' min='0' value='0'>"""
-        
+    
+      
     def get(self, request, *args, **kwargs):
       
         if "size" in kwargs:

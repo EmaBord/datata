@@ -13,7 +13,13 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# recaptcha google
+SITE_KEY_GOOGLE  ="6LezLxUTAAAAAPQ4kEqy5rMiMErLAk4_7g_9fFfH"
+SECRET_KEY_GOOGLE ="6LezLxUTAAAAAJ8BYJDVI1kQkIIdCiPLeA4aJ2ZG"
+URL_VERIFY_GOOGLE = "https://www.google.com/recaptcha/api/siteverify"
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,7 +43,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'asignacion'
+    'asignacion',
+    'register',
 )
 
 MIDDLEWARE_CLASSES = (
