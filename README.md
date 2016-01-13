@@ -26,9 +26,9 @@ En cuanto al procesamiento de los datos termina dando de orden O(N) dado que ite
 cada una. El pop es de orden O(1)
 
 También me encontré con problemas en el cliente para poder dibujar en el DOM tablas muy grandes, utilicé datatables paginadas con jquery y peticiones ajax,
-para hacer la creación asincrónica y que el usuario pueda ir cangando datos mientras se termina de dibujar el resto de la tabla, igualmente está limitado a cierta cantidad de filas, en este caso 1498,
+para hacer la creación asincrónica y que el usuario pueda ir cargando datos mientras se termina de dibujar el resto de la tabla, igualmente está limitado a cierta cantidad de filas, en este caso 1498,
 es decir el valor máximo de la matriz no puede ser de 1498*1498,porque sino no funciona la carga, sin esta logica el navegador se colgaba.
- Con más tiempo tal vez pordría investigar para escribir de manera más eficiente en el DOM o buscar otro tipo de solución.
+ Con más tiempo tal vez pordría investigar para escribir de manera más eficiente en el DOM o buscar otro tipo de solución o que la entrada sea otra, por ejemplo un archivo csv
 
 2. La aplicacion register que se corresponde con el registro y login de usuario, he agregado el recaptcha de google para evitar bots
 tanto en el registro como en el login.
