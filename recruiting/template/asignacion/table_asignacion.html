@@ -2,8 +2,9 @@
 {% block head %}
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.0.0/css/responsive.dataTables.min.css"/>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/scroller/1.4.0/css/scroller.dataTables.min.css"/> 
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/scroller/1.4.0/css/scroller.dataTables.min.css"/>
+ <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.0.0/js/dataTables.responsive.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/scroller/1.4.0/js/dataTables.scroller.min.js"></script>
@@ -13,8 +14,12 @@ Asignaciones
 {% endblock%}
 {% block asignacion_active %}class="active"{% endblock%}
 {% block content%}
-    <div  class="well well-lg"> 
-        <div class="row">
+    <div  class="well well-lg">
+        <div style="display:none" id="load" class="col-md-offset-3">
+          <img src="/static/images/load.gif" class="img-responsive" alt="load">
+        </div> 
+       <div id="table"> 
+        <div class="row" >
             <div class="col-md-2">
             <a href="{%url 'asignacion'%}" class="btn btn-info btn-raised"><i class="material-icons">reply</i> Regresar</a>
             </div>
@@ -22,7 +27,7 @@ Asignaciones
             <button id="calcular" type="submit" class="btn btn-primary  btn-raised btn-block"><i class="material-icons">functions</i> Calcular</button>
           </div>
         </div>        
-        <div class="table-responsive">
+        <div class="table-responsive" >
           <table id="felicidades" class="table  ">
             <thead>
                 <tr>
@@ -36,45 +41,56 @@ Asignaciones
         </div>
       
     </div>
-    <script>        
+  </div>
+    <script>   
+
         var table = $('#felicidades').dataTable({
-          ajax: "{% url 'asignacion_ajax' size%}" ,       
-          processing:true,  
+          "processing":true, 
+          
+          "ajax": {"type": "POST",
+                  "url":"{% url 'asignacion_ajax' size%}" ,
+                  "timeout":3600*5 
+                  }, 
+           
+           "scrollY":400,
+          "deferRender": true,
           "paging": true,
-          "lengthChange": true,
-          "searching": false,
-          "ordering": false,
-          "info": true,
-          "autoWidth": true,
-          "select": true,          
-          "language":{
-              "decimal":        "",
-              "emptyTable":     "Sin datos para mostrar",
-              "info":           "Mostrando  _END_ de _TOTAL_ entradas",
-              "infoEmpty":      "Mostrando 0 de 0 of 0 filas",
-              "infoFiltered":   "(filtrado desde _MAX_ filas)",
-              "infoPostFix":    "",
-              "thousands":      ",",
-              "lengthMenu":     "Mostrar _MENU_ filas",
-              "lface"   :     "pepe",
-              "faceoadingRecords": "Cargando...",
-              "processing":     "Cargando...",
-              "search":         "Buscar: ",
-              "zeroRecords":    "0 resultados",
-              "paginate": {
-                  "first":      "Primero",
-                  "last":       "Ultimo",
-                  "next":       "Siguiente",
-                  "previous":   "Anterior"
-              },
-              "aria": {
-                  "sortAscending":  ": activate to sort column ascending",
-                  "sortDescending": ": activate to sort column descending"
-              }
-            }          
+      "lengthChange": false,
+      "searching": false,
+      "ordering": false,
+      "info": false,
+      "autoWidth": true,
+      "select": false,
+      "language":{
+          "decimal":        "",
+          "emptyTable":     "Datos no encontrados",
+          "info":           "Mostrando  _END_ de _TOTAL_ entradas",
+          "infoEmpty":      "Mostrando 0 de 0 of 0 filas",
+          "infoFiltered":   "(filtrado desde _MAX_ filas)",
+          "infoPostFix":    "",
+          "thousands":      ",",
+          "lengthMenu":     "Mostrar _MENU_ filas",
+          "faceoadingRecords": "Cargando...",
+          "processing":     "Procesando...",
+          "search":         "Buscar: ",
+          "zeroRecords":    "0 resultados",
+          "paginate": {
+              "first":      "Primero",
+              "last":       "Ultimo",
+              "next":       "Siguiente",
+              "previous":   "Anterior"
+          },
+          "aria": {
+              "sortAscending":  ": activate to sort column ascending",
+              "sortDescending": ": activate to sort column descending"
+          }
+      }       
+        
         });
         $(document).ready(function () {        
         $('#calcular').click(function(){
+            document.getElementById('table').style.display = 'none';
+            document.getElementById('load').style.display = 'inline';
             var form = document.createElement('form');
             form.setAttribute('action', '{% url 'asignacion' %}');
             form.setAttribute('method', 'POST');
@@ -99,8 +115,10 @@ Asignaciones
                     input.setAttribute('name', datos[index].name);
                     input.setAttribute('value', datos[index].value);
                     form.appendChild(input);  
+                    console.log(index+" de" + datos.length);
                   }                
             }
+
             form.submit();
           } );
         } );

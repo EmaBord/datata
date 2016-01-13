@@ -3,6 +3,9 @@ from django.views.generic import TemplateView
 from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+
+
 
 
 class AsignacionView(TemplateView):
@@ -15,23 +18,9 @@ class AsignacionView(TemplateView):
         return super(AsignacionView, self).dispatch(*args, **kwargs)
 
 
-    def  evaluar(self,persona,articulo):
-        if persona==0:
-            return "Art."+str(articulo) 
-        else:
-            return """<input name='#"""+str(persona)+"""-"""+str(articulo)+""" 'class='form-control sm-input' style='width: 3em;'' type='number' step='1' min='0' value='0'>"""
-    
-      
     def get(self, request, *args, **kwargs):
       
-        if "size" in kwargs:
-            import json
-            size = int(kwargs.get("size"))
-           
-            personas  = [[ self.evaluar(p,a) for p in xrange(0,size+1)] for a in xrange(1,size+1)]
-            jSon = {'aaData':personas}
-            data = json.dumps(jSon)
-            return HttpResponse(data, content_type='application/json')
+
 
 
         return render(request, self.template_get)
@@ -47,7 +36,7 @@ class AsignacionView(TemplateView):
         size = int(size)
         articulos = [a for a in xrange(1,size+1)]
         personas  = [p for p in xrange(1,size+1)]
-        # grabar en archivo
+        # grabar en archivo?
         return render(request, self.template_table, {'articulos': articulos,'personas':personas,'size':size})
     
     def data(self,request,*args,**kwargs):
@@ -90,4 +79,23 @@ class AsignacionView(TemplateView):
                         felicidad_colectiva +=  int(maxima_felicidad)
                 except:
                     pass
+        
         return render(request, self.template_table_result, {'felicidad_colectiva': felicidad_colectiva,'maximas_felicidades':maximas_felicidades})
+
+
+def  evaluar(persona,articulo):
+        if persona==0:
+            return "Art."+str(articulo) 
+        else:
+            return """<input name='#"""+str(persona)+"""-"""+str(articulo)+""" 'class='form-control sm-input' style='width: 3em;'' type='number' step='1' min='0' value='0'>"""
+
+
+@csrf_exempt 
+@login_required
+def asignacionesAjax(request,size):
+    import json
+    size = int(size)           
+    personas  = [[ evaluar(p,a) for p in xrange(0,size+1)] for a in xrange(1,size+1)]
+    jSon = {'aaData':personas}
+    data = json.dumps(jSon)
+    return HttpResponse(data, content_type='application/json')

@@ -16,7 +16,7 @@ muy costoso junto a la coordinación de los procesos creados con las
 herramientas nombradas, además de limitar este la cantidad de procesos a 
 crear por el usuario que fue otro inconveniente encontrado.
 Luego de haber llegado a soluciones frustadas opte por la secuencial y utilizar las funciones max() y sum de python que tienen un orden de 
-ejecución de Big-Oh O(n) está función calcula el valor máximo del elemento de una lista, dando los siguientes tiempos:
+ejecución de Big-Oh O(n) está función calcula el valor máximo del elemento de una lista, dando los siguientes tiempos en el servidor:
 
 
 
@@ -51,9 +51,13 @@ Entonces empece a estudiar la posibilidad de tratar de ejecutar julia en python 
 luego de varios intentos y usando la librería pyjulia no lo he logrado, tal vez con un poco más de tiempo esto se podría llevar a cabo 
 reduciendo mucho el tiempo de ejecución.
 
+También me encontré con problemas en el cliente para poder dibujar en el DOM tablas muy grandes, utilicé datatables paginadas con jqery y peticiones ajax,
+para hacer la creación asincrónica y que el usuario pueda ir cangando datos, igualmente está limitado a cierta cantidad de filas, en este caso 1498,
+es decir el valor máximo de la matriz no puede ser de 1498*1498,porque sino no funciona la carga, sin esta logica el navegador se colgaba.
+ Con más tiempo tal vez pordría investigar para escribir de manera más eficiente en el DOM o buscar otro tipo de solución.
 
-2. La aplicacion register
-
+2. La aplicacion register que se corresponde con el registro y login de usuario, he agregado el recaptcha de google para evitar bots
+tanto en el registro como en el login.
 
 3. La aplicación derivada
 
