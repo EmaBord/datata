@@ -4,8 +4,9 @@ from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from helpers import derivada,format
+from recruiting.helpers import TemplateMethod
 
-class DerivadaView(TemplateView):
+class DerivadaView(TemplateView,TemplateMethod):
     template_get            = 'derivada/get.html'
    
     
@@ -15,28 +16,24 @@ class DerivadaView(TemplateView):
 
 
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_get)
+        context = {}
+        return render(request, self.template_get,self.buildContext(context))
     
       
     def post(self, request, *args, **kwargs):
-    	
-    	try:
-    		funcion = request.POST.get("funcion")
-    		x       = request.POST.get("x")
-    		resultado = self.derivar(funcion,x)
-    		yprima_pura = resultado[1]
-    		clean = self.evaluar([str(funcion),str(resultado[0])])
-    		resultado[0] = clean [0]
-    		funcion = clean[1]
-       		if int(x) >= int(resultado[1]):
-    		 	mayor=x
-    		else:
-    		 	mayor=resultado[1]
-    		print mayor
-    		return render(request, self.template_get,{'yprima':resultado[0],"x":x,"y":resultado[1],"funcion":funcion,"mayor":mayor
-    			})
-    	except:
-    		return render(request,self.template_get,{"error_msg":1})
+        try:
+            funcion = request.POST.get("funcion")
+            x       = request.POST.get("x")
+            resultado = self.derivar(funcion,x)
+            yprima_pura = resultado[1]
+            clean = self.evaluar([str(funcion),str(resultado[0])])
+            resultado[0] = clean [0]
+            funcion = clean[1]
+            context = {'yprima':resultado[0],"x":x,"y":resultado[1],"funcion":funcion}
+            return render(request, self.template_get,self.buildContext(context))
+        except:
+            context = {"error_msg":1}
+            return render(request,self.template_get,self.buildContext(context))
 
     @derivada  	
     def derivar(self,funcion,value_x):

@@ -31,4 +31,10 @@ class MaxHeap():
 		
 	def __repr__(self):
 		return str(self.elements)
-			
+
+def  evaluar(persona,articulo):
+        if persona==0:
+            return "Art."+str(articulo) 
+        else:
+            return """<input name='#"""+str(persona)+"""-"""+str(articulo)+""" 'class='form-control sm-input' style='width: 3em;'' type='number' step='1' min='0' value='0'>"""
+

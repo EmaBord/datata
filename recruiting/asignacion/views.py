@@ -4,9 +4,10 @@ from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from helpers import Articulo, MaxHeap
+from helpers import Articulo, MaxHeap,evaluar
+from recruiting.helpers import TemplateMethod
 
-class AsignacionView(TemplateView):
+class AsignacionView(TemplateView,TemplateMethod):
     template_get            = 'asignacion/get_asignacion.html'
     template_table          = 'asignacion/table_asignacion.html'
     template_table_result   = 'asignacion/table_asignacion_result.html' 
@@ -17,7 +18,8 @@ class AsignacionView(TemplateView):
 
 
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_get)
+        context = {}
+        return render(request, self.template_get,self.buildContext(context))
 
     def post(self, request, *args, **kwargs):        
         if "size" in request.POST:
@@ -29,7 +31,8 @@ class AsignacionView(TemplateView):
         size =  request.POST.get("size")
         size = int(size)
         personas  = [p for p in xrange(1,size+1)]# esto podria ser la consulta en la db
-        return render(request, self.template_table, {'personas':personas,'size':size})
+        context = {'personas':personas,'size':size}
+        return render(request, self.template_table,self.buildContext(context) )
     
     def data(self,request,*args,**kwargs):
         size =  request.POST.get("data")
@@ -49,6 +52,7 @@ class AsignacionView(TemplateView):
                         personas[id_persona] = maxh
                     else:                    
                         personas[id_persona].push(Articulo(id_articulo,felicidad))# T(n) =  O(log n) peor de los casos
+       
         maximas_felicidades = []
         felicidad_colectiva = 0      
         for id_persona in personas.keys(): #O(n) peor de los casos
@@ -58,14 +62,9 @@ class AsignacionView(TemplateView):
             if maxima_felicidad != 0:                        
                 maximas_felicidades.append({'articulo':articulo,'maxima_felicidad':maxima_felicidad,'persona':id_persona})
                 felicidad_colectiva +=  int(maxima_felicidad)                 
-        return render(request, self.template_table_result, {'felicidad_colectiva': felicidad_colectiva,'maximas_felicidades':maximas_felicidades})
+        context =  {'felicidad_colectiva': felicidad_colectiva,'maximas_felicidades':maximas_felicidades}
+        return render(request, self.template_table_result,self.buildContext(context))
 
-
-def  evaluar(persona,articulo):
-        if persona==0:
-            return "Art."+str(articulo) 
-        else:
-            return """<input name='#"""+str(persona)+"""-"""+str(articulo)+""" 'class='form-control sm-input' style='width: 3em;'' type='number' step='1' min='0' value='0'>"""
 
 
 @csrf_exempt 
