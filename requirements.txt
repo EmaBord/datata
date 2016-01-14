@@ -1,0 +1,4 @@
+Django==1.8
+requests==2.9.1
+sympy==0.7.6.1
+wheel==0.26.0
