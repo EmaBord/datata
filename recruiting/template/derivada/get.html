@@ -1,0 +1,208 @@
+{% extends 'base.html'%}
+{% block title%}
+Derivada
+{% endblock%}
+
+{% block derivada_active %}class="active"{% endblock%}
+{% block content%}
+<div class="col-md-12">  
+
+    <div  class="well well-lg">
+      {% if error_msg%}
+          <div class="alert alert-dismissible alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Los parámetros enviados no son válidos</strong>                    
+                  </div>
+      {% endif %}
+      {% if x%}
+        <h4>Punto:<strong>{{x}},{{y}}</strong></h4>
+      {% endif %}
+      <form class="form-horizontal" role="form" action="{% url 'derivada' %}" method="post">
+          {% csrf_token %} 
+           <fieldset>
+            
+            <div class="form-inline">
+              <div class="col-md-4">       
+                <input class="form-control" name="funcion" type="text" placeholder="coloque la funcion a derivar" required autofocus>
+              </div>
+            </div>
+            <div class="form-inline">
+              <div class="col-md-4">       
+                <input class="form-control" name="x" type="number" placeholder="coloque el valor de x" required>
+              </div>
+            </div>
+           
+            <div class="form-inline">
+                <div class=" col-md-4">
+                    <button type="submit" class="btn btn-raised  btn-info"><i class="material-icons">brush</i> Graficar </button>                  
+                </div>
+            </div>
+          </fieldset>
+      </form>
+      {% if funcion %}
+
+        <canvas id="myCanvas" width="1000" height="1000"></canvas>
+      {% endif%}
+  </div>
+
+</div>
+{% if funcion %}
+  <script>
+      function Graph(config) {
+        // user defined properties
+        this.canvas = document.getElementById(config.canvasId);
+        this.minX = config.minX;
+        this.minY = config.minY;
+        this.maxX = config.maxX;
+        this.maxY = config.maxY;
+        this.unitsPerTick = config.unitsPerTick;
+
+        // constants
+        this.axisColor = '#aaa';
+        this.font = '8pt Calibri';
+        this.tickSize = 20;
+
+        // relationships
+        this.context = this.canvas.getContext('2d');
+        this.rangeX = this.maxX - this.minX;
+        this.rangeY = this.maxY - this.minY;
+        this.unitX = this.canvas.width / this.rangeX;
+        this.unitY = this.canvas.height / this.rangeY;
+        this.centerY = Math.round(Math.abs(this.minY / this.rangeY) * this.canvas.height);
+        this.centerX = Math.round(Math.abs(this.minX / this.rangeX) * this.canvas.width);
+        this.iteration = (this.maxX - this.minX) / 1000;
+        this.scaleX = this.canvas.width / this.rangeX;
+        this.scaleY = this.canvas.height / this.rangeY;
+
+        // draw x and y axis
+        this.drawXAxis();
+        this.drawYAxis();
+      }
+
+      Graph.prototype.drawXAxis = function() {
+        var context = this.context;
+        context.save();
+        context.beginPath();
+        context.moveTo(0, this.centerY);
+        context.lineTo(this.canvas.width, this.centerY);
+        context.strokeStyle = this.axisColor;
+        context.lineWidth = 2;
+        context.stroke();
+        
+
+
+        // draw tick marks
+        var xPosIncrement = this.unitsPerTick * this.unitX;
+        var xPos, unit;
+        context.font = this.font;
+        context.textAlign = 'center';
+        context.textBaseline = 'top';
+
+       
+        context.restore();
+        
+        
+    
+        
+      };
+
+      Graph.prototype.drawYAxis = function() {
+        var context = this.context;
+        context.save();
+        context.beginPath();
+        context.moveTo(this.centerX, 0);
+        context.lineTo(this.centerX, this.canvas.height);
+        context.strokeStyle = this.axisColor;
+        context.lineWidth = 2;
+        context.stroke();
+
+        // draw tick marks
+        
+        var yPosIncrement = this.unitsPerTick * this.unitY;
+        var yPos, unit;
+        context.font = this.font;
+        context.textAlign = 'right';
+        context.textBaseline = 'middle';
+
+        
+        context.restore();
+       
+       
+          };
+
+      Graph.prototype.drawPoint = function() {
+        var context = this.context;
+        context.save();
+        context.save(); 
+        unidadY = -1;
+        unidadX = 13;
+        centerX =this.unitsPerTick * this.unitX+468 ;
+        centerY =this.unitsPerTick * this.unitY+205 ; 
+        context.rect(centerX +unidadX*{{x}},this.unitsPerTick * centerY+ unidadY*{{y}}, 10, 10);
+        context.fill();
+        context.stroke();
+
+      }
+
+      Graph.prototype.drawEquation = function(equation, color, thickness) {
+        var context = this.context;
+        context.save();
+        context.save();
+        this.transformContext();
+
+        context.beginPath();
+        context.moveTo(this.minX, equation(this.minX));
+
+        for(var x = this.minX + this.iteration; x <= this.maxX; x += this.iteration) {
+          context.lineTo(x, equation(x));
+        }
+
+        context.restore();
+        context.lineJoin = 'round';
+        context.lineWidth = thickness;
+        context.strokeStyle = color;
+        context.stroke();
+        
+        context.restore();
+        
+      
+      };
+
+      Graph.prototype.transformContext = function() {
+        var context = this.context;
+
+        // move context to center of canvas
+        this.context.translate(this.centerX, this.centerY);
+
+        /*
+         * stretch grid to fit the canvas window, and
+         * invert the y scale so that that increments
+         * as you move upwards
+         */
+        context.scale(this.scaleX, -this.scaleY);
+      };
+      var myGraph = new Graph({
+        canvasId: 'myCanvas',
+        minX: -33,
+        minY: -33,
+        maxX: 33,
+        maxY: 33,
+        unitsPerTick: 2
+      });
+      /*
+      myGraph.drawEquation(function(x) {
+        return 2*Math.exp(Math.sin(x));
+      }, 'green', 3);
+      */
+      myGraph.drawEquation(function(x) {
+        return {{yprima}};
+      }, 'blue', 3);
+
+      myGraph.drawEquation(function(x) {
+        return {{funcion}};
+      }, 'red', 3);
+
+      //myGraph.drawPoint(function() {}); 
+    </script>
+{% endif%}
+{% endblock %}

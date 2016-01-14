@@ -6,21 +6,21 @@ Asignaciones
 {% block asignacion_active %}class="active"{% endblock%}
 {% block content%}
 <div class="col-md-12">  
-  <div class="col-md-offset-2 col-md-6"> 
+  <div class=" col-md-6"> 
     <div  class="well well-lg">  
-      <form class="form-horizontal" role="form" action="{% url 'asignacion' %}" method="post">
+      <form class="form-inline" role="form" action="{% url 'asignacion' %}" method="post">
           {% csrf_token %} 
            <fieldset>
             <legend>Tamaño de la tabla</legend>
             <div class="form-group">
-              <div class="col-md-12">       
-                <input id="matrix" class="form-control" name="size" type="number" step="1" min="1" max="1498" placeholder="indique el tamaño de la tabla a crear"required autofocus>
+              <div class="col-md-4">       
+                <input id="matrix" class="form-control" name="size" type="number" step="1" min="1" max="1498" required autofocus>
               </div>
             </div>
            
             <div class="form-group">
-                <div class=" col-sm-12">
-                    <button type="submit" class="btn btn-raised btn-block btn-primary"><i class="material-icons">arrow_forward</i> Siguiente </button>                  
+                <div class=" col-md-8">
+                    <button type="submit" class="btn btn-raised  btn-primary"><i class="material-icons">arrow_forward</i> Siguiente </button>                  
                 </div>
             </div>
           </fieldset>

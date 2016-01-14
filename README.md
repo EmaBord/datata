@@ -33,6 +33,8 @@ es decir el valor máximo de la matriz no puede ser de 1498*1498,porque sino no 
 2. La aplicacion register que se corresponde con el registro y login de usuario, he agregado el recaptcha de google para evitar bots
 tanto en el registro como en el login.
 
-3. La aplicación derivada
-
+3. La aplicación derivada : utilicé la libreria sympy de python para calcular la deriva de la función enviada por parámetros, estuve probando y funciona aparentemente para cualquier tipo de función incluyendo seno, coseno, etc.
+Los gráficos aplican al resultado espero, en lo cual en el cliente para hacerlo use canvas, el punto no lo pude dibujar dado que es la primera vez que dibujo en el navegador funciones matemáticas, lo que si
+el punto en cuestión se indica con la informacion x,y
+	
 4. La aplicación nombres

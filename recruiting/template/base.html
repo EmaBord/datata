@@ -262,8 +262,8 @@
 		    <div class="navbar-collapse collapse navbar-responsive-collapse">
 		      <ul class="nav navbar-nav">
 		       	<li {% block asignacion_active %}{% endblock%}><a href=" {% url 'asignacion' %}"> Asignacion</a></li>
-				    <li {% block derivada_active %}{% endblock%}><a href=""> Derivada</a></li>
-				    <li {% block nombres_active %}{% endblock%}><a href=""> Nombres</a></li>        
+				    <li {% block derivada_active %}{% endblock%}><a href="{% url 'derivada' %}"> Derivada</a></li>
+				    <li {% block nombres_active %}{% endblock%}><a href="{% url 'nombres'%}"> Nombres</a></li>        
 				    <li><a href="{% url 'logout' %}"> Cerrar Sesión</a></li>
 		      </ul>		     
 		    </div>
