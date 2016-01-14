@@ -72,14 +72,14 @@ git clone https://github.com/EmaBord/datata.git
 
 
 <h5>Directamente en la maquina</h5>
+<ul>
+<li>1- cd datata</li>
 
-1- cd datata
+<li>2- sudo pip install -r requirements.txt</li>
 
-2- sudo pip install -r requirements.txt
+<li>3- cd recruiting</li>
 
-3- cd recruiting
+<li>4-  python manage.py  migrate</li>
 
-4-  python manage.py  migrate
-
-5- python manage.py runserver
-
+<li>5- python manage.py runserver</li>
+</ul>
