@@ -43,15 +43,17 @@ tanto en el registro como en el login.</p>
 Los gráficos aplican al resultado esperado, en lo cual en el cliente para hacerlo use canvas, el punto no lo pude dibujar dado que es la primera vez que dibujo en el navegador funciones matemáticas, lo que si
 el punto en cuestión se indica con la informacion x,y</p>
 	
-4). La aplicación nombres: utilicé angular para que lo cambios aplicados en los inputs se vean dinamicamente en el menu.
+<h3>La aplicación "nombres"</h3>
+<p>utilicé angular para que lo cambios aplicados en los inputs se vean dinamicamente en el menu.</p>
 
 
 
 Instalación para pruebas locales:
+===============================
 
 git clone https://github.com/EmaBord/datata.git
 
-Con entorno virtual
+<h5>Con entorno virtual</h5>
 
 1 - virtualenv datata
 
@@ -69,7 +71,7 @@ Con entorno virtual
 
 
 
-Directamente en la maquina
+<h5>Directamente en la maquina</h5>
 
 1- cd datata
 
