@@ -33,8 +33,10 @@ para hacer la creación asincrónica y que el usuario pueda ir cargando datos mi
 es decir el valor máximo de la matriz no puede ser de 1498*1498,porque sino no funciona la carga, sin esta logica el navegador se colgaba.
  Con más tiempo tal vez pordría investigar para escribir de manera más eficiente en el DOM o buscar otro tipo de solución o que la entrada sea otra, por ejemplo un archivo csv
 </p>
-2). La aplicacion register que se corresponde con el registro y login de usuario, he agregado el recaptcha de google para evitar bots
-tanto en el registro como en el login.
+
+<h3>La aplicacion "register"</h3>
+ <p> se corresponde con el registro y login de usuario, he agregado el recaptcha de google para evitar bots
+tanto en el registro como en el login.</p>
 
 3). La aplicación derivada : utilicé la libreria sympy de python para calcular la deriva de la función enviada por parámetro, estuve probando y funciona  para cualquier tipo de función incluyendo seno, coseno, etc.
 Los gráficos aplican al resultado esperado, en lo cual en el cliente para hacerlo use canvas, el punto no lo pude dibujar dado que es la primera vez que dibujo en el navegador funciones matemáticas, lo que si
