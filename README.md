@@ -51,7 +51,7 @@ el punto en cuestión se indica con la informacion x,y</p>
 Instalación para pruebas locales:
 ===============================
 
-1º <h5>git clone https://github.com/EmaBord/datata.git</h5>
+<h5>1º  git clone https://github.com/EmaBord/datata.git</h5>
 <ul>
 	<li>
 		<h5>Con entorno virtual</h5>
