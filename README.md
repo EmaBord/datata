@@ -51,35 +51,38 @@ el punto en cuestión se indica con la informacion x,y</p>
 Instalación para pruebas locales:
 ===============================
 
-git clone https://github.com/EmaBord/datata.git
-
-<h5>Con entorno virtual</h5>
+1º <h5>git clone https://github.com/EmaBord/datata.git</h5>
 <ul>
-<li>virtualenv datata</li>
+	<li>
+		<h5>Con entorno virtual</h5>
+		<ul>
+		<li>virtualenv datata</li>
 
-<li>cd datata</li>
+		<li>cd datata</li>
 
-<li>source bin/activate</li>
+		<li>source bin/activate</li>
 
-<li>pip install -r requirements.txt</li>
+		<li>pip install -r requirements.txt</li>
 
-<li>cd recruiting</li>
+		<li>cd recruiting</li>
 
-<li>python manage.py  migrate</li>
+		<li>python manage.py  migrate</li>
 
-<li>python manage.py runserver</li>
-</ul>
+		<li>python manage.py runserver</li>
+		</ul>
+	</li>
+	<li>
+		<h5>Directamente en la maquina</h5>
+		<ul>
+		<li>cd datata</li>
 
+		<li>sudo pip install -r requirements.txt</li>
 
-<h5>Directamente en la maquina</h5>
-<ul>
-<li>cd datata</li>
+		<li>cd recruiting</li>
 
-<li>sudo pip install -r requirements.txt</li>
+		<li>python manage.py  migrate</li>
 
-<li>cd recruiting</li>
-
-<li>python manage.py  migrate</li>
-
-<li>python manage.py runserver</li>
+		<li>python manage.py runserver</li>
+		</ul>
+	</li>
 </ul>
