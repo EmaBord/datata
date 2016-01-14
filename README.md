@@ -1,8 +1,12 @@
+Recruiting Datata
+===============
+
 Este proyecto está desarrollado en Django 1.8.
 
 Está divido en 4 aplicaciones Django
 
-1). La aplicación "asignación" se corresponde con la resolución del punto 1 
+<h3>La aplicación "asignación"</h3> 
+<p>se corresponde con la resolución del punto 1 
 inciso maximizar felicidad colectiva. En la elección final del algoritmo 
 que resuelve el problema fue elegida de diferentes estrategias y luego 
 de probar diferentes librerías. En un comienzo pensé en resolverlo de 
@@ -28,7 +32,7 @@ También me encontré con problemas en el cliente para poder dibujar en el DOM t
 para hacer la creación asincrónica y que el usuario pueda ir cargando datos mientras se termina de dibujar el resto de la tabla, igualmente está limitado a cierta cantidad de filas, en este caso 1498,
 es decir el valor máximo de la matriz no puede ser de 1498*1498,porque sino no funciona la carga, sin esta logica el navegador se colgaba.
  Con más tiempo tal vez pordría investigar para escribir de manera más eficiente en el DOM o buscar otro tipo de solución o que la entrada sea otra, por ejemplo un archivo csv
-
+</p>
 2). La aplicacion register que se corresponde con el registro y login de usuario, he agregado el recaptcha de google para evitar bots
 tanto en el registro como en el login.
 
@@ -37,3 +41,40 @@ Los gráficos aplican al resultado esperado, en lo cual en el cliente para hacer
 el punto en cuestión se indica con la informacion x,y
 	
 4). La aplicación nombres: utilicé angular para que lo cambios aplicados en los inputs se vean dinamicamente en el menu.
+
+
+
+Instalación para pruebas locales:
+
+git clone https://github.com/EmaBord/datata.git
+
+Con entorno virtual
+
+1 - virtualenv datata
+
+2 - cd datata
+
+3- source bin/activate
+
+4- pip install -r requirements.txt
+
+5 - cd recruiting
+
+6-  python manage.py  migrate
+
+7- python manage.py runserver
+
+
+
+Directamente en la maquina
+
+1- cd datata
+
+2- sudo pip install -r requirements.txt
+
+3- cd recruiting
+
+4-  python manage.py  migrate
+
+5- python manage.py runserver
+
