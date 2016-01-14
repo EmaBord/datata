@@ -1,4 +1,6 @@
-<<<<<<< HEAD
+db.sqlite3
+pip-selfcheck.json
+share/*
 bin/*
 include/*
 lib/*
@@ -61,4 +63,4 @@ docs/_build/
 
 # PyBuilder
 target/
->>>>>>> 0899e0c0d220e56e199f24fd104b0bd3fdcde15c
+
