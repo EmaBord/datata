@@ -54,32 +54,32 @@ Instalación para pruebas locales:
 git clone https://github.com/EmaBord/datata.git
 
 <h5>Con entorno virtual</h5>
+<ul>
+<li>virtualenv datata</li>
 
-1 - virtualenv datata
+<li>cd datata</li>
 
-2 - cd datata
+<li>source bin/activate</li>
 
-3- source bin/activate
+<li>pip install -r requirements.txt</li>
 
-4- pip install -r requirements.txt
+<li>cd recruiting</li>
 
-5 - cd recruiting
+<li>python manage.py  migrate</li>
 
-6-  python manage.py  migrate
-
-7- python manage.py runserver
-
+<li>python manage.py runserver</li>
+</ul>
 
 
 <h5>Directamente en la maquina</h5>
 <ul>
-<li>1- cd datata</li>
+<li>cd datata</li>
 
-<li>2- sudo pip install -r requirements.txt</li>
+<li>sudo pip install -r requirements.txt</li>
 
-<li>3- cd recruiting</li>
+<li>cd recruiting</li>
 
-<li>4-  python manage.py  migrate</li>
+<li>python manage.py  migrate</li>
 
-<li>5- python manage.py runserver</li>
+<li>python manage.py runserver</li>
 </ul>
