@@ -1,7 +1,7 @@
 Recruiting Datata
 ===============
 
-Este proyecto está desarrollado en Django 1.8.
+Este proyecto está desarrollado en Django 1.8 para Python 2.7.
 
 Está divido en 4 aplicaciones Django
 
