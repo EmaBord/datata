@@ -37,4 +37,4 @@ tanto en el registro como en el login.
 Los gráficos aplican al resultado espero, en lo cual en el cliente para hacerlo use canvas, el punto no lo pude dibujar dado que es la primera vez que dibujo en el navegador funciones matemáticas, lo que si
 el punto en cuestión se indica con la informacion x,y
 	
-4. La aplicación nombres
+4. La aplicación nombres: utilicé angular para que lo cambios aplicados en los inputs se vean dinamicamente en el menu.
