@@ -1,9 +1,8 @@
-Este proyecto está desarrollado en Django 1.8, corresponde a la 
-evaluación de parte datata para reclutamiento.
+Este proyecto está desarrollado en Django 1.8.
 
 Está divido en 4 aplicaciones Django
 
-1. La aplicación "asignación" se corresponde con la resolución del punto 1 
+1). La aplicación "asignación" se corresponde con la resolución del punto 1 
 inciso maximizar felicidad colectiva. En la elección final del algoritmo 
 que resuelve el problema fue elegida de diferentes estrategias y luego 
 de probar diferentes librerías. En un comienzo pensé en resolverlo de 
@@ -22,7 +21,7 @@ reduciendo mucho el tiempo de ejecución.
 
 Entonces comencé a evaluar la posibilidad de una MaxHeap de Articulos para cada Persona sabiendo que en el peor de los casos en la inserción de la misma 
 es de orden O(log N) combinando con la iteración sobre los valores  enviados por parámetro del request da un orden final de O(N*log N)
-En cuanto al procesamiento de los datos termina dando de orden O(N) dado que itero sobre todas la MaxHeap de las personas y luego hago un pop sobre 
+En cuanto al procesamiento de los datos termina dando de orden O(N) dado que itero sobre todas las MaxHeaps de las personas y luego hago un pop sobre 
 cada una. El pop es de orden O(1)
 
 También me encontré con problemas en el cliente para poder dibujar en el DOM tablas muy grandes, utilicé datatables paginadas con jquery y peticiones ajax,
@@ -30,11 +29,11 @@ para hacer la creación asincrónica y que el usuario pueda ir cargando datos mi
 es decir el valor máximo de la matriz no puede ser de 1498*1498,porque sino no funciona la carga, sin esta logica el navegador se colgaba.
  Con más tiempo tal vez pordría investigar para escribir de manera más eficiente en el DOM o buscar otro tipo de solución o que la entrada sea otra, por ejemplo un archivo csv
 
-2. La aplicacion register que se corresponde con el registro y login de usuario, he agregado el recaptcha de google para evitar bots
+2). La aplicacion register que se corresponde con el registro y login de usuario, he agregado el recaptcha de google para evitar bots
 tanto en el registro como en el login.
 
-3. La aplicación derivada : utilicé la libreria sympy de python para calcular la deriva de la función enviada por parámetros, estuve probando y funciona aparentemente para cualquier tipo de función incluyendo seno, coseno, etc.
-Los gráficos aplican al resultado espero, en lo cual en el cliente para hacerlo use canvas, el punto no lo pude dibujar dado que es la primera vez que dibujo en el navegador funciones matemáticas, lo que si
+3). La aplicación derivada : utilicé la libreria sympy de python para calcular la deriva de la función enviada por parámetro, estuve probando y funciona  para cualquier tipo de función incluyendo seno, coseno, etc.
+Los gráficos aplican al resultado esperado, en lo cual en el cliente para hacerlo use canvas, el punto no lo pude dibujar dado que es la primera vez que dibujo en el navegador funciones matemáticas, lo que si
 el punto en cuestión se indica con la informacion x,y
 	
-4. La aplicación nombres: utilicé angular para que lo cambios aplicados en los inputs se vean dinamicamente en el menu.
+4). La aplicación nombres: utilicé angular para que lo cambios aplicados en los inputs se vean dinamicamente en el menu.
